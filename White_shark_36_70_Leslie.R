@@ -15,7 +15,9 @@ library(popbio)     #for solving matrices
 library(matrixStats) #for colQuantiles function
 library(TeachingDemos)      #for grey scale
 
-setwd("C:/Matias/Analyses/Demography/White shark 36 or 70")
+handl_OneDrive=function(x)paste('C:/Users/myb/OneDrive - Department of Primary Industries and Regional Development/Matias',x,sep='/')
+
+setwd(handl_OneDrive("Analyses/Demography/White shark 36 or 70"))
 
 
 

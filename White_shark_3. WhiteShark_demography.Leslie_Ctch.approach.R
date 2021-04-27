@@ -27,8 +27,9 @@ set.seed(999)  #for reproducibility
 
 
 #---1.  MODELLED SCENARIOS SECTION---
+handl_OneDrive=function(x)paste('C:/Users/myb/OneDrive - Department of Primary Industries and Regional Development/Matias',x,sep='/')
 
-source("C:/Matias/Analyses/SOURCE_SCRIPTS/MS.Office.outputs.R")
+source(handl_OneDrive("Analyses/SOURCE_SCRIPTS/MS.Office.outputs.R"))
 
 #Life history scenarios
 Life.hist.scenarios=list(LH.1=1, LH.2=2)
@@ -62,13 +63,13 @@ library(TeachingDemos)      #for grey scale
 library(grDevices)    #grey scale
 library(gplots)
 
-source("C:/Matias/Analyses/Demography/White shark/3. Derive.var.covar.Mat.R")
-setwd("C:/Matias/Analyses/Demography/White shark/Outputs")
+source(handl_OneDrive("Analyses/Demography/White shark/3. Derive.var.covar.Mat.R"))
+setwd(handl_OneDrive("Analyses/Demography/White shark/Outputs"))
 
 #Effort
 
   # 1. GHATF effort (Gummy gillnet Effort 1975:2012, in 1000 km lift)
-Effort.GHATF= read.csv("C:/Matias/Data/Population dynamics/GHATS_gillnet_effort.csv") #1971:2014 financial yrs 
+Effort.GHATF= read.csv(handl_OneDrive("Data/Population dynamics/GHATS_gillnet_effort.csv")) #1971:2014 financial yrs 
 id=which(Effort.GHATF$Year==1975)
 Effort.GHATF$SA[1:2]=0
 Effort.GHATF$Tas[1:2]=0
@@ -94,17 +95,17 @@ Effort.GHATF=rbind(Recons.Effort.GHATF,Effort.GHATF.prev,Effort.GHATF)
 
 
   #2. SA Marine gillnet scalefish (in 1000 km gillnet days)
-SA.scale= read.csv("C:/Matias/Data/Population dynamics/MSFeffortbyfinancialyear.csv") #financial yr
+SA.scale= read.csv(handl_OneDrive("Data/Population dynamics/MSFeffortbyfinancialyear.csv")) #financial yr
 SA.scale$Year=as.numeric(substr(SA.scale$Financial.year,1,4))
 names(SA.scale)[2]="Effort"
 
-SA.scale.period= read.csv("C:/Matias/Data/Population dynamics/MSFeffortbysurveytimeperiod.csv") 
+SA.scale.period= read.csv(handl_OneDrive("Data/Population dynamics/MSFeffortbysurveytimeperiod.csv")) 
 SA.scale.period=SA.scale.period[2:4,]
 names(SA.scale.period)=c("Period","Agg.Eff")   
 
 
   #3. WA Shark gillnet         (in km gillnet days)
-Effort.WA= read.csv("C:/Matias/Analyses/Demography/White shark/Effort.white.csv")  
+Effort.WA= read.csv(handl_OneDrive("Analyses/Demography/White shark/Effort.white.csv"))  
 Effort.WA[,2]=Effort.WA[,2]/1000  #convert to 1000 km gillent days
 
 
@@ -137,8 +138,8 @@ legend("topleft",c("TDGDLF","GHATF (SA only)","SA marine"),col=c(3,2,4),lty=1,bt
 # Recons.catch=rbind(Recons.obs.catch,Recons.pred.catch)
 # Recons.catch=aggregate(cbind(Mean.Catch.App1,Low95.Catch.App1,Up95.Catch.App1)~Time,Recons.catch,sum)
 
-Recons.catch=read.csv("C:/Matias/Analyses/White shark catch reconstruction/Total.catch.csv")
-Recons.catch2=read.csv("C:/Matias/Analyses/White shark catch reconstruction/Total.catch.Method2.csv")
+Recons.catch=read.csv(handl_OneDrive("Analyses/White shark catch reconstruction/Total.catch.csv"))
+Recons.catch2=read.csv(handl_OneDrive("Analyses/White shark catch reconstruction/Total.catch.Method2.csv"))
 
 names(Recons.catch)[4:6]=c("Mean.Catch.App1","Low95.Catch.App1","Up95.Catch.App1")
 names(Recons.catch2)[4:6]=names(Recons.catch)[4:6]
@@ -146,8 +147,8 @@ names(Recons.catch2)[4:6]=names(Recons.catch)[4:6]
 
 
 #Reconstructed TDGDLF cpue for calculating Commonwealth catch
-Recons.cpue=read.csv("C:/Matias/Analyses/White shark catch reconstruction/CPUE.Folly.csv")
-Recons.cpue2=read.csv("C:/Matias/Analyses/White shark catch reconstruction/CPUE.Folly.Method2.csv")
+Recons.cpue=read.csv(handl_OneDrive("Analyses/White shark catch reconstruction/CPUE.Folly.csv"))
+Recons.cpue2=read.csv(handl_OneDrive("Analyses/White shark catch reconstruction/CPUE.Folly.Method2.csv"))
 
 names(Recons.cpue)[c(4,6:7)]=c("Mean.cpue","Low95.cpue","Up95.cpue")
 names(Recons.cpue2)[c(4,6:7)]=names(Recons.cpue)[c(4,6:7)]
@@ -157,7 +158,7 @@ Recons.cpue2=subset(Recons.cpue2,Fishing.region=="SS2")
 
 
 #5. Reconstructed Lobster and TDGDLF droplines catches for WA
-Droplines= read.csv("C:/Matias/Data/Population dynamics/Dropline.csv") 
+Droplines= read.csv(handl_OneDrive("Data/Population dynamics/Dropline.csv")) 
 Droplines$Year=1988:2001
 
 
@@ -2235,7 +2236,7 @@ LH2.col="grey20"
 
 if(plot.power.point=="NO")
 {
-  setwd("C:/Matias/Analyses/Demography/White shark/Outputs")
+  setwd(handl_OneDrive("Analyses/Demography/White shark/Outputs"))
   greyscale=c(LH1.col,LH2.col)
   Basic="black"
   line.col=gray.colors(NN,start=0,end=0.8)
@@ -2245,7 +2246,7 @@ if(plot.power.point=="NO")
 #colors for power point presentation
 if(plot.power.point=="YES")
 {
-  setwd("C:/Matias/Analyses/Demography/White shark/Outputs/Power.point")
+  setwd(handl_OneDrive("Analyses/Demography/White shark/Outputs/Power.point"))
   greyscale=c("red","chartreuse4")  
   Basic="blue"
   #line.col=c("black","red","chartreuse4","blue","mediumorchid1")
@@ -2331,7 +2332,7 @@ mtext("Distribution",side=2,outer=T,line=-0.75,font=1,las=0,cex=2)
 dev.off()
 
   #Scenarios for Temperature
-plot(density(TempSim, adjust=2), type="l",lty=1,col="white",xlab="Temperature (°C)",ylab="",main="",
+plot(density(TempSim, adjust=2), type="l",lty=1,col="white",xlab="Temperature (?C)",ylab="",main="",
        xlim=c(5,25),ylim=c(0,0.285),yaxt="n",cex.axis=1,cex.lab=1.4)
 LinesPlot(TempSim,1,1)
 #expression(Temperature~(~degree~C))
@@ -2981,8 +2982,8 @@ mtext("Financial year",1,2.5,outer=T,cex=1.75)
 dev.off()
 
 #Barplots of cpue
-cpue.Folly=read.csv("C:/Matias/Data/Population dynamics/CPUE.Folly.csv")
-cpue.Folly2=read.csv("C:/Matias/Data/Population dynamics/CPUE.Folly.Method2.csv")
+cpue.Folly=read.csv(handl_OneDrive("Data/Population dynamics/CPUE.Folly.csv"))
+cpue.Folly2=read.csv(handl_OneDrive("Data/Population dynamics/CPUE.Folly.Method2.csv"))
 tiff(file="Steve.CPUEs.tiff",width = 2400, height = 2400,units = "px", res = 300, compression = "lzw")
 par(mfcol=c(2,1),las=1,mai=c(.1,.1,.075,.15),omi=c(.8,.8,.1,.05),mgp=c(1.5,.8,0))
 fn.barplot(cpue.Folly,"NO")

@@ -226,8 +226,9 @@ for (i in 1:N.sens)
 
 
 #Run sensitivity analysis
+handl_OneDrive=function(x)paste('C:/Users/myb/OneDrive - Department of Primary Industries and Regional Development/Matias',x,sep='/')
 
-setwd("C:/Matias/Analyses/Demography/White shark/Outputs/MSY_Catch/Sensitivities")
+setwd(handl_OneDrive("Analyses/Demography/White shark/Outputs/MSY_Catch/Sensitivities"))
 
 
 STORE.sens=vector("list",length=N.sens)
